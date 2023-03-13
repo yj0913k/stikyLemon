@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+th:fragment="myLayout2(head, main)">
+	<head>
+		<meta charset="UTF-8">
+		<title>템풀릿</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/commons/common.css">
+		<link rel="icon" href="/images/favicon/orange.png" type="image/x-icon" sizes="16x16">
+		<th:block th:replace="${head}"/>
+	</head>
+	<body>
+		<th:block th:replace="${main}"/>
+	</body>
+</html>

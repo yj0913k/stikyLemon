@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="adminpage/admin-layout::adminLayout(~{this::head}, ~{this::main})">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<head>
+	<link rel="stylesheet" href="/css/admin/admin-main.css">
+	<link rel="stylesheet" href="/css/admin/goods/admin-reg.css">
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<script type="text/javascript">
+		var idx=1;
+		//부트스트랩 임포트해서 텍스츠창받음
+		$(document).ready(function () {
+			$('#summernote').summernote();
+			getCategory();
+		});
+
+		/**
+		 * 카테고리 관련 JQuery
+		 * @param el
+		 */
+		function subCateSelected(el) {
+			//어떤카테고리가 변경되었는지
+			var depth = $(el).index() + 1;
+			//1:1차, 2:2차 ,3:3차,4:4차
+			if (depth == 3) return;//마지막카테고리가 선택되면 종료
+
+			//하위 카테고리 검색 후 태그생성
+			var parentNo = $(el).val();
+			//alert(cateNo);
+			$.ajax({
+				url: `/comm/categorys/${parentNo}`,
+				success: function (result) {//result<==category.html
+					//$(".first").html(result);
+					//현재 표현되는 카테고리 제일 마지막위치 삽입
+					//var length=$(".cate>.category").length;
+					$(`#cate > .category:gt(${depth - 1})`).remove();
+					$("#cate>.category").last().after(result);
+					//var depth=$("#cate>.category").last().index()+1;
+					$("#cate>.category").last().find(".depth").text(depth + 1 + "차 카테고리");
+				}
+
+			});
+		}
+
+		function getCategory() {
+			//1차카테고리 정보를 읽어
+			$.ajax({
+				url: "/comm/categorys",
+				success: function (result) {//result<==category.html
+					$("#cate").html(result);
+					var depth = $("#cate>.category").last().index() + 1;
+					$("#cate>.category").last().find(".depth").text(depth + "차 카테고리");
+				}
+			});
+		}
+
+		/**
+		 * 이미지 관련 jQuery
+		 * @param el
+		 */
+		function gimgChanged(el) {
+			var fileData = $(el)[0].files[0];
+			console.log(fileData);
+
+			var formData = new FormData()
+			formData.append('gimg', fileData);
+
+			$.ajax({
+				url: "/admin/temp-upload",
+				type: "post",
+				contentType: false,
+				processData: false,
+				data: formData,
+				success: function (map) { //서버에 업로드이후 url을 리턴-> 파라미터에 전달
+					console.log(map);
+
+					$(el).siblings(".img").css("background-image", "url(" + map.url + ")");
+					$(el).siblings(".newName").val(map.newName);
+					$(el).siblings(".orgName").val(map.orgName);
+					//대표이미지 와 추가이미지 구분
+					if ($(el).prop("id") == "defimg") return;//대표이미지인경우 여기서 함수종료
+
+					//추가이미지를 넣을수 있는 태그 삽입
+					if (idx < 3) addTag();
+
+				}
+			});
+		}
+		function addTag() {
+
+			var tag = `
+  		<div class="addimg">
+			<label class="img" for="addimg_${idx}">+</label>
+			<input id="addimg_${idx}" class="gimg" type="file" name="gimg" onchange="gimgChanged(this)">
+			<input type="hidden" class="newName" name="newName">
+			<input type="hidden" class="orgName" name="orgName">
+		</div>
+    	`
+			//클래스이름이 addimg인 모든태그 선택자중 마지막태그 뒤에 삽입
+			$(".addimg").last().after(tag);
+			idx++;
+		}
+		/*
+		function requiredCheck(){
+			if($("#defimg").css("background-image")==""){
+				event.preventDefault();
+				alert("대표이미지는 무조건 설정 해주셔야 합니다.")
+			}
+		}
+		*/
+	</script>
+</head>
+<main id="all" class="content-size">
+	<section class="reg-fr flex center">
+		<p>상품 등록이 가능합니다.</p>
+	</section>
+	<section class="reg-se">
+		<div class="flex center">
+			<form action="/admin/goods/reg" method="post">
+				<ul class="flex between">
+					<li class="wrap">
+						<div>
+							<p>대표이미지는 무조건 등록하셔야 합니다.</p>
+							<p>
+								<div>
+									<label class="img" for="defimg">+</label>
+									<input id="defimg" class="gimg" type="file" name="gimg"
+										   onchange="gimgChanged(this)">
+									<input type="hidden" class="newName" name="newName">
+									<input type="hidden" class="orgName" name="orgName">
+								</div>
+							</p>
+						</div>
+						<div>
+							<p>추가이미지</p>
+							<td class="flex" >
+								<div class="addimg">
+									<label class="img" for="addimg">+</label>
+									<input id="addimg" class="gimg" type="file" name="gimg" onchange="gimgChanged(this)">
+									<input type="hidden" class="newName" name="newName">
+									<input type="hidden" class="orgName" name="orgName">
+								</div>
+								<!-- 여기에 동적 삽입 -->
+							</td>
+						</div>
+						<p>
+				    		<textarea id="summernote" name="content" placeholder="상세설명을 작성하세요.">
+| Information 
+	- 캐주얼한 무드의 실용성 높은 스트링 백팩입니다.
+	- 촘촘한 짜임의 나일론 소재로 내구성이 높은 매력적인 제품입니다.
+	- 두꺼운 스트링을 사용하여 볼드한 디자인이 포인트 되는 제품입니다.
+	- 스트링 매듭을 풀고, 묶을 수 있어 기장 조절이 자유롭습니다.
+	- 앞・뒤면 구분 없이 자유로운 방향으로 편리하게 사용이 가능합니다.
+	- 수납력이 좋으며 취향에 따라 크로스로 맬 수 있어 활용도가 높습니다.
+	- 베이직한 디자인으로 제작하여 다양한 무드의 아웃핏을 선사합니다.
+| Size(cm)
+	가로: 33.5 세로: 44 끈 길이: 95
+	*측정 방법에 따라 1-3cm 오차가 있을 수 있습니다.
+| Fabric
+	Nylon 100%
+| Delivery
+	-배송기간
+	영업일 기준 3-10일 소요 예정
+	(주말, 공휴일 제외) 
+				    		</textarea>
+						</p>
+					</li>
+					<li class="wrap">
+						<p>
+						<div id="cate">
+							<!-- 여기에 카테고리가 들어갈꺼에요 -->
+
+						</div>
+						
+						</p>
+
+						<p>
+							<input type="text" name="title" placeholder="제목">
+						</p>
+
+						<p>
+							<input type="text" name="price" placeholder="가격">
+						</p>
+						<p>
+							<input type="number" name="stock" placeholder="재고">
+						</p>
+						<p>
+				    		<textarea name="specifications" placeholder="상세설명을 작성하세요.">
+<h2>|specifications</h2>
+	
+| Sizes
+	size -  x  x  cm
+	maximun shoulder strap - cm 	
+| materials
+	material outside - recycled PET bottles
+	material inside - waterproof nylon
+	material strap - cotton webbing
+	zipper - matt white YKK
+	buckles - matt white metal
+				    		</textarea>
+						</p>
+						<hr>
+						<p>
+				    		<textarea name="productCare" placeholder="상세설명을 작성하세요.">
+|product care
+	
+You can easily clean this bag with a wet cloth. We advise you not to wash the bag in the
+                    washing
+                    machine. Just some water will do the trick!
+				    		</textarea>
+						</p>
+						<p>
+							<button class="admin-reg-btn">상품 등록하기</button>
+						</p>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</section>
+</main>
+</html>

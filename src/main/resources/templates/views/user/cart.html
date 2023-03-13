@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})">
+<head>
+    <link rel="stylesheet" href="/css/user/cart.css">
+    <script src="/js/user/cart.js"></script>
+</head>
+<main class="flex view-size center">
+    <!--상품 리스트가 없을 시-->
+    <div th:if="${list.size()}==0">
+        <div>
+            <h3><span>My Cart</span></h3>
+        </div>
+        <div id="empty-content" class="flex column center">
+            <h3>Oops! Your cart is empty.</h3>
+            <a>Continue Shopping</a>
+        </div>
+        <div id="cover">
+        </div>
+    </div>
+    <!--상품 리스트가 있을 시-->
+    <div th:if="${list.size()}>0" class="flex content">
+        <div style="flex: 2" class="flex column">
+            <div class="underbar">
+                <h3><span>My Cart</span></h3>
+            </div>
+            <ul class="product-list">
+                <li class="product underbar" th:each="dto:${list}"> <!--th:each="dto :${list}"-->
+                    <div class="product flex">
+                        <div class="flex goods-detail" style="flex: 3">
+                            <div style="flex: 1">
+                                <img th:src="${dto.defImg}" width="150px" height="150px">
+                            </div>
+                            <ul class="flex column" style="flex: 3">
+                                <li th:text="${dto.title}"></li>
+                                <li th:text="|${dto.price}원|"></li>
+                                <li>
+                                    <div class="btn-ea">
+                                        <ul class="flex" style="text-align:center;">
+                                            <!--<li class="bseq_ea"></li> &lt;!&ndash;재고수량&ndash;&gt;-->
+                                            <li class="flex">
+                                                <input type="hidden" class="price" name="sell_price"
+                                                       th:value="${dto.price}" id="vprice">
+                                                <input type="hidden" class="no" th:value="${dto.no}">
+                                                <input type="button" value=" - " name="minus"
+                                                       th:id="|minus_${dtoStat.count}|" onclick="btnMinusClicked(this)">
+                                                <input type="text" class="amount" th:value="${dto.quantity}" min="1"
+                                                       max="99" size="3" th:id="|amount_${dtoStat.count}|"
+                                                       onchange="quantityChanged(this)">
+                                                <input type="button" value=" + " name="add"
+                                                       th:id="|add_${dtoStat.count}|" onclick="btnAddClicked(this)">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex around aicenter sub-total" style="flex: 1">
+                            <input type="text" th:id="|TP_${dtoStat.count}|" class="TP"
+                                   th:value="${dto.price}*${dto.quantity}" readonly>원
+                            <input type="hidden" class="no" th:value="${dto.no}">
+                            <button onclick="btnRemoveClicked(this)">X</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn-option">
+                <img src="/images/icon/orange.png" width="15" height="15">
+                <span>쿠폰 적용</span>
+            </button>
+            <br>
+            <button class="btn-option">
+                <img src="/images/icon/orange.png" width="15" height="15">
+                <span>문의사항</span>
+            </button>
+        </div>
+        <div id="total-pay" style="flex: 1" class="flex column">
+            <div>
+                <div class="underbar">
+                    <h3><span>Order summary</span></h3>
+                </div>
+                <div class="underbar">
+                    <ul>
+                        <li class="flex between">
+                            <span>Subtotal</span>
+                            <input type="hidden" id="list-size" th:value="${list.size}">
+                            <span id="sum-price">물건합계</span>
+                        </li>
+                        <li class="flex between">
+                            <span>배송료</span>
+							<div>
+                            	<span id="tot-delivery">3000</span>
+								<span>원</span>
+							</div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li class="flex between">
+                            <span>총합</span><span id="tot-price">총합값</span>
+                        </li>
+                        <li class="sub-text">
+                            <span>세금포함</span>
+                        </li>
+                    </ul>
+                    <div>
+                        <button class="btn-style-common" onclick="btnCartOrderClicked()">
+							주문/결제
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</html>

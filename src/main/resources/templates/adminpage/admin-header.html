@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/admin/admin-header.css">
+
+<header>
+	<section>
+		<h1>헤더상단메뉴</h1>
+		<div class="wrap flex between view-size">
+			<h1>메뉴</h1>
+			<nav id="hn1">
+				<div class="wrap">
+					<ul class="flex">
+						<li><a href="/">About</a></li>
+						<li><a href="/">거래처</a></li>
+						<li><a href="/">보고서</a></li>
+						<li><a href="/">이벤트현황</a></li>
+					</ul>
+				</div>
+			</nav>
+			<nav id="hn2">
+				<div class="wrap">
+					<ul class="flex">
+						<li><a href="#"><img src="/images/admin/adminheader/searchIcon.png"/></a></li>
+						<li><a href="#"><img src="/images/admin/adminheader/zuyoIcon.png"/></a></li>
+						<li><a href="#"><img src="/images/admin/adminheader/myprofileIcon.png"/></a></li>
+						<li class="upup"><button><a href="/">보고서 작성하기</a></button></li>
+					
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</section>
+	<section id="hb">
+		<h1>헤더하단메뉴</h1>
+		<div class="wrap view-size">
+			<dl class="flex center view-size">
+				<dt>
+					<div class="menulogo">
+						<a href="/admin">adminHome</a>
+					</div>
+				</dt>
+					
+				<dd class="dropmenu flex">
+					<h1>메뉴부분영역</h1>
+
+					<div class="my-dropdown">
+						<button class="dropbtn">
+							<a href="/admin">회원관리</a>
+						</button>
+						<div class="dropdown-content">
+							<ul>
+								<li><a href="#">회원조회</a></li>
+								<li><a href="#">회원수정</a></li> 
+								<li><a href="#">회원삭제</a></li>
+								<li><a href="#">회원통계</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="my-dropdown">
+						<button class="dropbtn">
+							<a href="/admin/goods/list">상품관리</a>
+						</button>
+						<div class="dropdown-content">
+							<ul>
+								<li><a href="/admin/goods/reg">상품등록</a></li>
+								<li><a href="/admin/category/reg">카테고리등록</a></li>
+								<li><a href="/admin/goods/list">상품조회</a></li>
+								<li><a href="#">할인적용</a></li>
+								
+							</ul>
+						</div>
+					</div>
+
+					<div class="my-dropdown">
+						<button class="dropbtn">
+							<a href="/admin/qna/list">QNA</a>
+						</button>
+						<div class="dropdown-content">
+							<ul>
+								<li><a href="/admin/qna/list">FAQ</a></li>
+								<li><a href="/admin/qna/list">문의글조회</a></li>
+								<li><a href="/admin/qna/list">문의글관리</a></li>
+								<li><a href="/admin/qna/list">답변글작성</a></li>
+							</ul>
+							  
+						</div>
+					</div>
+
+					<div class="my-dropdown">
+						<button class="dropbtn">
+							<a href="/admin">영업관리</a>
+						</button>
+						<div class="dropdown-content">
+							<ul>
+								<li><a href="#">매출조회</a></li>
+								<li><a href="#">매출분석</a></li>
+								<li><a href="#">매출통계</a></li>
+								<li><a href="#">고용현황</a></li>
+							</ul>
+						</div>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</section>
+</header>
+</html>

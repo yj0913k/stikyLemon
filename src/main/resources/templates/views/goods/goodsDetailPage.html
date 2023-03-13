@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:fragment="myLayout(head, main)">
+<head>
+	<script src="/js/user/cart.js"></script>
+	<meta charset="UTF-8">
+	<title>템풀릿</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/commons/header.css">
+	<link rel="stylesheet" href="/css/commons/footer.css">
+	<link rel="stylesheet" href="/css/goods/goodsDetailPage.css">
+
+	<script src="/js/user/rating.js"></script>
+	<script src="/js/user/detailPage.js"></script>
+
+	<script th:inline="javascript">
+		$(function () {
+			$("#btn-addCart").click(btnCartClicked);
+		});
+
+		function loginCheck() {
+			var isLogin = false;
+			$.ajax({
+				url: "/comm/login-check",
+				async: false,
+				success: function (result) {
+					isLogin = result;
+				}
+			});
+			return isLogin;
+		}
+
+		//주문클릭했을때
+		function btnOrderClicked(){
+			var quantity=$("#quantity").val();
+			var goodsNo=$("#no").val();
+
+			if(!loginCheck()) {
+				var result = confirm("바로구매는 로그인 이후 가능합니다.\n로그인페이지로 이동할까요?");
+				if (result) {
+					location.href = "/comm/signin";
+				}
+				return;
+			}
+
+			location.href=`/members/order?goodsNo=${goodsNo}&quantity=${quantity}`;
+		}
+
+
+		function btnCartClicked() {
+			var quantity = $("#quantity").val();
+			var goodsNo = [[${dto.no}]];
+
+			if(!loginCheck()) {
+				var result = confirm("카트저장은 로그인 이후 가능합니다.\n로그인페이지로 이동할까요?");
+				if (result) {
+					location.href = "/comm/signin";
+				}
+				return;
+			}
+
+			$.ajax({
+				url: "/members/cart",
+				type: "post",
+				data: {
+					quantity: quantity,
+					goodsNo: goodsNo
+				},
+				success: function () {
+					if (confirm("장바구니에 저장되었습니다.\n장바구니로 이동하시겠습니까?")) {
+						location.href = "/members/cart";
+					}
+				}
+			});
+		}
+	</script>
+
+</head>
+<body>
+<th:block th:insert="/layout/header::header"/>
+<main id="all">
+	<div class="wrap flex">
+		<div class="leftS">
+			<div th:each="img:${imgs}" th:if="${img.defImg}">
+				<img th:src="${img.totUrl}" alt="상품이미지">
+			</div>
+			<div class="flex secondParents">
+				<div class="second" th:each="img:${imgs}" th:if="!${img.defImg}">
+					<img th:src="${img.totUrl}" width="100px" height="100px" alt="상품이미지">
+				</div>
+			</div>
+			<div class="third" th:text="${dto.content}">
+				콘텐츠
+			</div>
+		</div>
+		<div class="rightS">
+			<h3 th:text="${dto.title}"></h3>
+			<!--            <div class="RS" th:text="${dto.specifications}"></div>-->
+			<div class="price" th:text="${dto.price}+'원'"></div>
+			<section class="color">
+				<div>Pick a colour: moonrise pink</div>
+				<div class="color2">
+					<button></button>
+				</div>
+			</section>
+			<section class="color">
+				<div>Quantity</div>
+				<div class="btn-ea">
+					<ul class="flex" style="text-align:center;">
+						<li class="bseq_ea">10</li>
+						<li class="flex">
+							<input type="hidden" name="no" th:value="${dto.no}">
+							<input type="hidden" value="65" id="vprice">
+							<input type="button" value=" - " id="minus">
+							<input type="text" name="quantity" value="1" size="3" max="99" id="quantity">
+							<input type="button" value=" + " id="add">
+						</li>
+					</ul>
+				</div>
+			</section>
+			<input type="hidden" id="no" th:value="${dto.no}">
+			<button type="button" id="btn-addCart">장바구니추가</button>
+			<button type="button" id="btn-order" onclick="btnOrderClicked()">구매하기</button>
+			<div class="goodsdetail">
+				<h2>specifications</h2>
+				<ul th:text="${dto.specifications}">
+
+				</ul>
+				<hr>
+				<h2>product care</h2>
+				<div th:text="${dto.productCare}">
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div id="reply">
+		<p>별점과 상품평을 입력해주세요</p>
+		<form method="post" name="myform" id="myform" action="/comm/goods/detail/review">
+			<fieldset>
+				<span class="text-bold"></span>
+				<input type="radio" name="rate" value="5" id="rate1"><label
+					for="rate1">★</label>
+				<input type="radio" name="rate" value="4" id="rate2"><label
+					for="rate2">★</label>
+				<input type="radio" name="rate" value="3" id="rate3"><label
+					for="rate3">★</label>
+				<input type="radio" name="rate" value="2" id="rate4"><label
+					for="rate4">★</label>
+				<input type="radio" name="rate" value="1" id="rate5"><label
+					for="rate5">★</label>
+			</fieldset>
+			<div><span>★ [[${average}]]</span></div>
+			<!--            <input value="5" name="rate" type="hidden">-->
+			<textarea cols="70" name="text" id="reviewContents" placeholder="좋은 리뷰 감사합니다!">
+
+            </textarea>
+			<input type="hidden" name="goodsNo" th:value="${dto.no}">
+			<br>
+			<div>
+				<button type="submit">등록하기</button>
+			</div>
+		</form>
+	</div>
+	<div class="container">
+		<div class="item flex ">
+			<ul>
+				<li th:each="dto:${reviews}">
+					<p th:if="${dto.rate == 5}">★★★★★</p>
+					<p th:if="${dto.rate == 4}">★★★★</p>
+					<p th:if="${dto.rate == 3}">★★★</p>
+					<p th:if="${dto.rate == 2}">★★</p>
+					<p th:if="${dto.rate == 1}">★</p>
+					<p th:text="${dto.text}"></p>
+					<p th:text="${dto.memberName}"></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</main>
+<th:block th:insert="/layout/footer::footer"/>
+</body>
+</html>

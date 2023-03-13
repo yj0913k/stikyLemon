@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="adminpage/admin-layout::adminLayout(~{this::head}, ~{this::main})">
+<head>
+	<link rel="stylesheet" href="/css/admin/goods/admin-detail.css">
+	<script th:inline="javascript">
+		var idx=1;
+		let baseImgList = [];
+		$(document).ready(function() {
+			$('#summernote').summernote();
+			$("#btn-img-add").click(addTag);
+			/*$(".btn-img-delete").click(removeTag);*/
+			baseImgSetting();			//디비에서 가져온 이미지 데이터 목록 저장
+		});
+		function btnCancelClicked(){	//취소클릭시 리스트 페이지이동
+			location.href="/admin/goods/list";
+		}
+		function btnRemoveClicked(){	//삭제처리시 동의얻고 삭제처리하러감
+			var goodNo = [[${dto.no}]];
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href=`/admin/goods/delete/${goodNo}`;
+			}
+		}
+
+		//처음에 이미지 뿌려줄 때 목록을 baseImgList라는 리스트변수에 저장
+		function baseImgSetting(){
+			var oldImg = [[${imgs}]];
+			//alert(oldImg[0].newName);
+			for(var i=0;i<oldImg.length;i++){
+				baseImgList.push(oldImg[i].newName);
+			}
+			$("#baseImgName").val(baseImgList)
+		}
+		//사진 삭제 버튼 눌렀을 때 태그삭제
+		function removeTag(el){
+			$(el).parents("div.addimg").remove();
+		}
+
+		//이미지 파일 변경되었을 때  --> temp폴더 업로드 + value값세팅 백그라운드이미지세팅
+		function gimgChanged(el){
+			var fileData = $(el)[0].files[0];
+			console.log(fileData);
+
+			var formData = new FormData();
+			formData.append('gimg',fileData);
+
+			$.ajax({
+				url:"/admin/temp-upload",
+				type:"post",
+				data:formData,
+				contentType:false,
+				processData:false,
+				success:function (map){//서버에 업로드 성공시에 url주소를 받아서처리
+					console.log(map);
+
+					$(el).siblings(".img").css("background-image", "url("+map.url+")");
+					console.log(map.newName);
+					$(el).siblings(".newName").val(map.newName);
+					$(el).siblings(".orgName").val(map.orgName);
+
+					//대표이미지 와 추가이미지 구분
+					//if($(el).prop("id")=="defimg") return; //대표이미지 처리는 여기서끝
+					//이미지 파일개수 제한 품
+				}
+			});
+		}
+
+		//사진추가 버튼 눌렀을 시 태그 추가해줌
+		function addTag() {
+			// class="addimg" 인 모든 태그 (복수형)
+			var addimgs = $(".addimg")
+
+			var tag=	//자바스크립트 백틱 이용하여 변수적용 가능합니다~
+					`
+					<div class="addimg">
+						<label class="img" for="addimg${idx}">+</label>
+						<input id="addimg${idx}" class="gimg" type="file" name="gimg" onchange="gimgChanged(this)">
+						<input type="hidden" class="newName" name="newName">
+						<input type="hidden" class="orgName" name="orgName">
+						<div>
+							<button class="btn-img-delete" type="button" onclick="removeTag(this)">삭제</button>
+						</div>
+					</div>
+					`;
+			if($("addimgs").length){	//태그 추가
+				addimgs.last().after(tag);
+			}else{
+				$("#btn-img-add").before(tag);	//추가이미지 하나도 없을 때.
+			}
+
+			idx++;
+		}
+	</script>
+</head>
+<main class="content-size">
+	<h1>상품 상세 페이지</h1>
+
+	<form class="flex" action="/admin/goods/update" method="post">
+		<ul class="flex column" style="flex: 1">
+			<li>
+				<ol th:each="img:${imgs}" th:if="${img.defImg}">
+					<li>대표이미지</li>
+					<li>
+						<div>
+							<label class="img main-img" for="defimg" th:style="|background-image: url('${img.totUrl}')|">+</label>
+							<input id="defimg" class="gimg" type="file" name="gimg" onchange="gimgChanged(this)">
+							<input type="hidden" class="newName" name="newName" th:value="${img.newName}">
+							<input type="hidden" class="orgName" name="orgName" th:value="${img.orgName}">
+						</div>
+					</li>
+				</ol>
+				<ol >
+					<li>추가이미지</li>
+					<li id="addimgList" class="flex">
+						<div class="addimg" th:each="img : ${imgs}" th:if="!${img.defImg}">
+							<label class="img" th:for="|addimg_${imgStat.count}|" th:style="|background-image: url('${img.totUrl}')|">+</label>
+							<input th:id="|addimg_${imgStat.count}|" class="gimg" type="file" name="gimg" onchange="gimgChanged(this)">
+							<input type="hidden" class="newName" name="newName"  th:value="${img.newName}">
+							<input type="hidden" class="orgName" name="orgName" th:value="${img.orgName}">
+							<div>
+								<button class="btn-img-delete" type="button" onclick="removeTag(this)">삭제</button>
+							</div>
+						</div>
+
+						<button type="button" id="btn-img-add">사진추가</button>
+					</li>
+				</ol>
+			</li>
+			<li>
+				<label>내용
+					<textarea id="summernote" th:text="${dto.content}" name="content">
+					</textarea>
+					<!--/*<textarea id="summernote">[[${detail.content}]]</textarea>*/-->
+				</label>
+			</li>
+		</ul>
+		<ul class="details flex column" style="flex: 1">
+			<li >
+				>><span th:each="cate:${cates}" th:text="|> ${cate}|"></span>
+			</li>
+			<li>
+				<label>상품번호
+					<span th:text="${dto.no}"></span>
+					<input type="hidden" th:value="${dto.no}" name="no">
+					<!--/*<span>[[${detail.gno}]]</span>*/-->
+				</label>
+			</li>
+			<li>
+				<label>등록일
+					<span th:text="${dto.createdDate}">detail.createdDate</span>
+					<!--/*<span>[[${detail.createdDate}]]</span>*/-->
+				</label>
+			</li>
+			<li>
+				<label>수정일
+					<span th:text="${dto.updatedDate}">detail.updatedDate</span>
+					<!--/*<span>[[${detail.createdDate}]]</span>*/-->
+				</label>
+			</li>
+			<li>
+				<label>상품명
+					<input type="text" name="title" th:value="${dto.title}">
+				</label>
+			</li>
+
+			<li>
+				<label>판매가격
+					<input type="text" th:value="${dto.price}" name="price">
+				</label>
+			</li>
+			<li>
+				<label>재고
+					<input type="text" th:value="${dto.stock}" name="stock">
+				</label>
+			</li>
+			<li class="flex column">
+				<div>
+					<p>specifications</p>
+					<textarea th:text="${dto.specifications}" name="specifications">
+					</textarea>
+
+				</div>
+
+				<hr>
+				<div>
+					<p>product care</p>
+					<textarea th:text="${dto.productCare}" name="productCare">
+					</textarea>
+				</div>
+			</li>
+			<li class="btn-edit">
+				<input id ="baseImgName" type="hidden" name="baseImgList">
+				<button type="submit">수정완료</button>
+				<button type="button" onclick="btnCancelClicked()">취소</button>
+				<button type="button" onclick="btnRemoveClicked()">삭제</button>
+			</li>
+		</ul>
+	</form>
+</main>
+
+</html>

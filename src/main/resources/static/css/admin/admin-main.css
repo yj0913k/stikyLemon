@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/*---------------그리드로 카드영역 구분----------------------*/
+main>.wrap .g-containter{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 2em;
+ 	
+}
+main>.wrap .g-containter li{
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 1em;
+	box-shadow: 2px 2px 1px rgba(255,255,255,0.2);
+}
+main>.wrap .g-containter li:nth-of-type(1) {
+	grid-row: 1 / 3;
+}
+main>.wrap .g-containter li:nth-of-type(2) {
+	grid-row: 1 / 3;
+}
+main>.wrap .g-containter li:nth-of-type(6) {
+	grid-column: 2 / 4;
+}
+/*---------------카드 내용 꾸미기---------------------*/
+
+main>.wrap .g-containter li p{
+	padding: 0.5em;
+}
+main>.wrap .g-containter li .card-title{
+	margin:  0.5em 1.5em;
+}
+main>.wrap .g-containter li .card-content{
+	margin:  0.5em 1em;
+}
+.card-title>p>a{
+	color: rgba(188, 125, 7, 1);
+}
+main>.wrap .g-containter li span{
+	display: inline-block;
+	padding: 1em;
+}
+main>.wrap .g-containter li img{
+	width: 60px;
+	height: 60px;
+}
+main>.wrap .g-containter li #zz{
+	width: 200px;
+	height: 200px;
+}
+/*-------------카드 꾸미기----------------------*/
+

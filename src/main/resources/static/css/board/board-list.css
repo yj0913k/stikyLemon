@@ -1,0 +1,112 @@
+.right4{
+	float: right;
+}
+
+.left4 {
+    float: left;
+}
+.td1{
+	color:#8D6023; 
+}
+.createdDate, .readCount{
+	text-align: center;
+}
+.content-size-v{
+	width: 280px;
+	margin: 0 auto;
+}
+
+.board{
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	min-height: 15vh;
+	text-align: center;
+	
+}
+
+.board div.wrap{
+	margin: -20px auto;
+    color: #81573F;
+    font-weight: 500;
+    font-size: 21px;
+    padding-top: 50px;
+}
+
+.table-0{
+	margin: 0 auto;
+	padding-bottom: 50px;
+	width: 100%;
+   /*  border-collapse: collapse; */  /*테이블 사이 간격 없애기*/
+}
+
+
+.table-0 tr{
+	background-color:#C68646;
+	
+}
+
+.table-0 th, td{  
+	/*padding: 1em 0.5em;*/
+    padding: 6px 24px;
+    vertical-align: middle;
+}
+
+.table-0 .tr1 th{
+	color: white;
+}
+
+.table-0 .tr2 {
+	text-align: center;
+	background-color:#ECD7C2;
+}
+
+.table-0 .tr2 td{
+	color:#8D6023;
+	font-weight: 400;
+}
+
+#board {
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.bu-a{
+	background-color: #97654A;
+    color: #e8d9d0;
+    font-size: 17px;
+    padding: 9px;
+    border-radius: 25px;
+    font-weight: 350;
+}
+.bu-a a{
+
+	color: #e8d9d0;
+	
+}
+.bu-a img{
+	height: 12px;
+	position: relative;
+}
+ul.call{
+	background:  #f3e9de;
+	border-radius: 25px;
+	padding: 5px 0px 10px;
+}
+ul.call a{
+	font-size: 20px;
+    color: #8D6023;
+    line-height: 2em;
+    font-weight: 500;
+}
+ul.call li{
+	font-size: 15px;
+    color: #ac752b;
+    line-height: 20px;
+}
+
+.wrap6 ul.call img{
+	height: 20px;
+}

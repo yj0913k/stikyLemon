@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.table-0 th, td{  
+    /* padding: 1em 0.5em; */
+    padding: 10px 30px;
+    vertical-align: middle;
+    font-size: 18px;
+    color: #81573F;
+    background: #e8d9d0;
+    border: 2px solid white;
+    border-radius: 25px;
+}
+
+.title-d{
+	margin: -20px auto;
+    color: #81573F;
+    font-weight: 500;
+    font-size: 21px;
+    padding: 50px 0 5em;
+    text-align: center;
+}
+
+#admin_answer, input#answer_insert{
+	background: #e8d9d0;
+}
+
+input#answer_insert:hover{
+	background: #956548;
+	color: white;
+	
+}
+
+.title-a {
+    display: flex;
+    justify-content: end;
+    width: 440px;
+    font-size: 23px;
+    margin-top: 10px;
+}
+.bu-dd2{
+	padding-left: 10px;
+}

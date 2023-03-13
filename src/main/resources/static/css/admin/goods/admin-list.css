@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#list-table{
+    border:1px solid black;
+    width: 100%;
+}
+td,th{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+td button{
+    border: 1px solid red;
+    width: 40%;
+    margin: 0 5%;
+}
+
+.list-img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}

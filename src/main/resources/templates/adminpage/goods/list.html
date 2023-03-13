@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="adminpage/admin-layout::adminLayout(~{this::head}, ~{this::main})">
+	<head>
+		<link rel="stylesheet" href="/css/admin/goods/admin-list.css">
+		<script th:inline="javascript">
+			function btnRemoveClicked(el){
+				var no = $(el).parent().siblings(".dtoNo").text();
+				if(confirm("정말"+no+"번 상품을 삭제하시겠습니까?")){
+					location.href=`/admin/goods/delete/${no}`;
+				}
+			}
+		</script>
+	</head>
+	<main>
+		<h2>상품 리스트</h2>
+		<table id="list-table">
+			<tr>
+				<th>상품번호</th>
+				<th>상품 이미지</th>
+				<th>상품명</th>
+				<th>가격</th>
+				<th>재고수량</th>
+				<th>등록일</th>
+				<th>비고</th>
+			</tr>
+			<tr th:each="dto:${list}">
+				<td class="dtoNo">[[${dto.no}]]</td>
+				<td class="list-img" th:style="|background-image: url('${dto.defImgUrl}');|"></td>
+				<td><a th:href="|/admin/goods/${dto.no}|">[[${dto.title}]]</a></td>
+				<td>[[${dto.price}]]</td>
+				<td>[[${dto.stock}]]</td>
+				<td>[[${dto.updatedDate}]]</td>
+				<td class="flex between">
+					<a th:href="|/admin/goods/${dto.no}|"><button>수정</button></a>
+					<button onclick="btnRemoveClicked(this)">삭제</button>
+				</td>
+			</tr>
+
+		</table>
+	</main>
+	
+</html>

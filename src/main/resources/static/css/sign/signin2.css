@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+#all {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50vh;
+	text-align: center;
+	font-weight: 300;
+}
+
+#all>div {
+	margin-bottom: 30px;
+}
+
+.wrap {
+	margin: 20px 0;
+}
+
+#login>div>a{
+	display: inline-block;
+	left: 180px;
+	top: -20px;
+	font-size: 20px;
+	position: relative;
+	color: #a9a9a9;
+}
+
+#sgmain>span>a {
+	position: relative;
+	color: #0198ff;
+}
+
+#input {
+	margin: 10px;
+	font-size: 11px;
+	color: #a9a9a9;
+	text-align: left;
+}
+#input>div>input{
+	border-bottom: 1px solid #f9b840;
+}
+#input>div>input:focus{
+	border-bottom: 1px solid #f9b840;
+	outline: none;
+}
+
+#forgot>div{
+	font-size: 11px;
+	text-align: left;
+	margin-left: 10px;
+	text-decoration: underline;
+}
+
+#login {
+	font-size: 48px;
+	font-weight: 300;
+	margin-top: 50px;
+}
+
+#input div>input {
+	width: 316px;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	border-bottom-width: 1px;
+}
+
+#input>div {
+	margin-top: 10px;
+
+}
+
+#email>div{
+	width: 336px;
+	justify-content: center;
+}
+#email>div>a {
+	margin: 0 15px;
+	border-radius: 5px;
+	width: 25px;
+	height: 25px;
+	background-repeat: no-repeat;
+	background-size: contain;
+
+}
+
+#email>div>a:first-child{
+	justify-content: left;
+	background-image: url("/images/google.png");
+}
+
+#email > div > a:last-child {
+	background-image: url("/images/kakao.png");
+}
+
+.login{
+	width: 316px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	box-sizing: border-box;
+	margin: 10px;
+	font-size: 13px;
+	background-color: #bcbcbc;
+	color: #fff;
+	border-radius: 5px;
+}
+
+#line>div {
+	position: relative;
+	z-index: -3;
+	margin-left: 10px;
+	width: 316px;
+	height: 13px;
+	border-bottom: 1px solid #a9a9a9;
+}
+
+#or {
+	margin: 0px;
+}
+
+#or>span {
+	position: relative;
+	z-index: 3;
+	top: -15px;
+	background-color: #fff;
+}
+
+

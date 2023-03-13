@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})">
+<head>
+	<link rel="icon" href="/images/favicon/orange.png" type="image/x-icon" sizes="16x16">
+	<link rel="stylesheet" href="/css/main/intro.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/main/chat-bot.css">
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="/js/chat.js"></script>
+
+</head>
+
+<main class="view-size">
+	<aside id="chat-bot">
+		<div class="wrap">
+			<button type="button" id="btn-chat-open"  onclick="openChat()">
+                <img src="/images/orange.png" width="60px"></button>
+			<th:block th:insert="~{common/chat-bot.html::#chat-disp}"/>
+		</div>
+	</aside>
+	<!--
+	<a href="/admin/goods/list">어드민상품리스트</a>
+	<a href="/admin/goods/detail">어드민상품디테일(수정)</a>-->
+	<!-- <a sec:authorize="isAuthenticated()" href="/logout">로그아웃</a> -->
+	<a href="/members/cart"></a>
+	<h1>메인컨텐츠</h1>
+	<th:block th:insert="views/main/intro::main"></th:block>
+
+	<hr>
+
+</main>
+</html>

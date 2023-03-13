@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/*기본적으로 제공되는 스타일 중 모든 태그의 여백(마진,패딩)들을 적용하지 않음*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+
+/*기본 리셋 퍼온것*/
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**
+우리가 적용한 리셋
+ */
+
+*{margin: 0; padding:0; box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	color: #222;
+}
+a{text-decoration: none; color: #222; text-underline-position: from-font;}
+li{list-style: none;}
+h1{position: absolute; left : -9999px;}
+button {border: none; background-color: transparent; cursor: pointer;}
+address {font-style: normal;}
+input{border:none}
+

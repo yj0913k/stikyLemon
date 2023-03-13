@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#bot {
+	position: fixed;
+	right: 10px;
+	bottom: 30px;
+}
+
+#bot>div>button>a {
+	top: -5px;
+	width: 30px;
+	height: 30px;
+}
+
+.wave {
+	border-bottom-style: dotted;
+	border-bottom-color: black; 
+	border-radius: 1px;
+	border-bottom-size : 3px;
+}

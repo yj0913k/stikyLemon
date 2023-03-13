@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:each="dto:${list}">
+	<a th:href="|/comm/goods/detail/${dto.no}|" class="items flex column around">
+		<img height="90%" th:src="${dto.defImgUrl}" alt="'no image!'">
+		<br>
+		<br>
+		<br>
+		<div class="flex column between">
+			<p th:text="${dto.title}">
+				backpack large | meet me in the meadows | moonrise pink
+			</p>
+			<span th:text="${dto.price}">$64.95</span>
+		</div>
+	</a>
+	<div>
+		<span>★ [[${dto.avg}]] ([[${dto.reCount}]])</span>
+	</div>
+</div>
+</html>

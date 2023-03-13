@@ -1,0 +1,44 @@
+@charset "UTF-8";
+main{
+	margin: 5em auto;
+}
+main div{
+	height:600px;
+	padding: 3em;
+	background-color: rgb(206, 222, 215);
+}
+.orders>li{
+	border-bottom: 1px solid #fff;
+	padding: 1em;
+}
+.orders>li.myorders-menu p:first-child{
+	font-size: 32px;
+	font-weight: 500;
+}
+.orders>li.myorders-menu p:last-child{
+	font-size: 14px;
+	font-weight: 200;
+	color: #a4a4a4; 
+}
+.orders>li.myorders-content{
+	
+	padding:3em;
+	margin: 5em auto;
+	height: 300px;
+	
+}
+.orders>li.myorders-content p{
+	display: block;
+	font-weight: 300;	
+	font-size: 18px;
+	padding: 0.2em;
+	text-align: center;
+	
+}
+.orders>li.myorders-content p a{
+	
+	font-size: 16px;
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration-color : rgba(255, 255, 255, 0.8);
+	
+}

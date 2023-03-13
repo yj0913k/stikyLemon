@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.wrap-all{
+	margin-bottom: 30em;
+}
+
+#all {
+	margin: 0 auto;
+	
+	padding-top: 25px;
+	
+	
+}
+#all div.wrap{
+	margin: 0px auto;
+    color: #81573F;
+    font-weight: 500;
+    font-size: 21px;
+    padding: 25px 0 25px;
+    width: 10%;
+    border-color:#b18056;
+    padding: 15px 0 15px;
+    text-align: center;
+}
+
+ul.mu{ 
+	margin:35px auto;
+	text-align: center;
+	padding-bottom: 35px;
+}
+
+ul.mu li{
+	margin: 10px;
+	color: #CD8964;
+	display: flex;
+}
+
+ul.mu li a span{
+	color: #CD8964;
+}
+
+.list {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	padding: 0 5em 0 2em;
+	
+}
+.list img{
+	height: 61px;
+    margin: 2px;
+	
+}

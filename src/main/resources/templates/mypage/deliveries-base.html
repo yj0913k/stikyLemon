@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<ul th:if="${base}">
+		<li>
+			<span th:text="${base.receiverName}">수하인</span>
+			(<span th:text="${base.deliveryAddrName}">배송이이름</span>)
+		</li>
+		<li th:text="${base.phone1}">
+			전화번호
+		</li>
+		<li>
+			(<span th:text="${base.postcode}">우편번호</span>)
+			<span th:text="${base.roadAddress}">길주소</span>
+			<span th:text="${base.extraAddress}">추가</span>
+			<span th:text="${base.detailAddress}">세부주소</span>
+			<button class="btn">정보수정</button>
+			<input type="hidden" th:value="${base.no}" id="baseDeliveryNo" >
+		</li>
+	</ul>
+</html>

@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+#all {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50vh;
+	text-align: center;
+	font-weight: 300;
+}
+
+.wrap {
+	margin: 20px 0;
+}
+
+#all div>button>a{
+	display: inline-block;
+	left: 180px;
+	top: -20px;
+	font-size: 20px;
+	position: relative;
+	color: #a9a9a9;
+}
+
+#login {
+	font-size: 48px;
+	font-weight: 300;
+	margin-top: 100px;
+}
+
+#log-btn>div {
+	width: 316px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	box-sizing: border-box;
+	cursor: pointer;
+	margin: 10px;
+	font-size: 13px;
+	border-radius: 5px;
+}
+
+#log-btn>div>a {
+	position: inherit;
+	margin-left: -23px;
+	line-height: 20px;
+}
+
+#google>a {
+	color: #fff;
+}
+
+#kakao>a {
+	color: #3c1f1b;
+}
+
+#google {
+	background-color: #3e7de8;
+}
+
+#google>img {
+	position: relative;
+	right: 86px;
+	top: 5px;
+	border-radius: 5px;
+}
+
+#kakao {
+	background-color: #fae300;
+}
+
+#kakao>img {
+	position: relative;
+	right: 88.5px;
+	top: 5px;
+	border-radius: 5px;
+}
+
+#sgmain>button>span>a {
+	position: relative;
+	color: #0198ff;
+}
+
+#email>div {
+	width: 316px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	box-sizing: border-box;
+	cursor: pointer;
+	margin: 10px;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+#line>div {
+	position:relative; z-index: -3;
+	margin-left: 10px;
+	width: 316px;
+	height: 13px;
+	border-bottom: 1px solid #a9a9a9;
+}
+#or{margin: 0px;}
+#or>span {
+	position:relative; z-index: 3;
+	top:-15px;
+	background-color: #fff;
+}

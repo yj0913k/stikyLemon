@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})">
+<head>
+	<link rel="stylesheet" href="/css/commons/common.css">
+    <link rel="stylesheet" href="/css/commons/header.css">
+    <link rel="stylesheet" href="/css/commons/footer.css">
+	<link rel="stylesheet" href="/css/user/mypage/myAccount.css">
+ <script type="text/javascript">
+    function test() {
+      var p1 = document.getElementById('password1').value;
+      var p2 = document.getElementById('password2').value;
+      if( p1 != p2 ) {
+        alert("비밀번호가 일치 하지 않습니다");
+        return false;
+      } else{
+        alert("비밀번호가 일치합니다");
+        return true;
+      }
+
+    }
+  </script>
+
+</head>
+<body>
+
+<th:block th:insert="/layout/header::header"/>
+	<main class="flex center">
+		<h1>내정보페이지</h1>
+		<div class="view-size-c center">
+			<section class="accounts">
+				<ol class="accounts-menu">
+					<li>my Account</li>
+					<li id="LoginEmail">
+						Your Login email can't be changed | 
+						Login Email . <span class="email-1" sec:authentication="principal.email"></span> 
+						 
+					</li>
+					
+					<!-- 
+					<li>View and edit your personal info below.</li>
+					<li>Your Login email can't be changed</li>
+					 -->
+				</ol>
+			</section>	
+			<nav class="accounts">
+				<form action="/members/myAccount" method="post">
+					<ol class="accounts-content">
+						<li>
+							<!-- <span sec:authentication="principal.name"></span> -->
+							<p class="pp">Name</p><p><input type="text" name="name" placeholder="이름" th:value="${#authentication.principal.name}"></p>
+						</li>
+						<li>
+							<!-- <span sec:authentication="principal.nickName"></span> -->
+							<p class="pp">Nick name</p><p><input type="text" name="nickName" placeholder="닉네임" th:value="${#authentication.principal.nickName}"></p>
+						</li>
+						<li>
+							<p class="pp">Password</p><p><input type="text" name="pass" id="password1" placeholder="비밀번호"></p>
+						</li>
+						<li>
+							<p class="pp">Confirm password</p><p><input type="text" name="pass1" id="password2" placeholder="비밀번호"></p>
+						</li>
+						<li>
+							<p class="pp">Phone</p><p><input type="text" name="phone" placeholder="전화번호" ></p>
+						</li>
+					<!-- 	<li>
+							<span sec:authentication="principal.email"></span>
+							<p><input type="hidden" name="email" placeholder="이메일" th:value="${#authentication.principal.email}"></p>
+						</li> -->
+						<li>
+							<p class="bu-dda"><input type="button" class="bu-dd bu-dd2" onclick="test()" value="비밀번호 확인"></p>
+						</li>
+						<li class="center">
+							<input type="hidden" name="mno" th:value="${#authentication.principal.mno}">
+	    					<input type="hidden" name="_method" value="PUT">
+	    						<button type="button"  class="bu-aa">Discard</button>
+	    						<button type="submit" onClick="alert('수정 완료! 로그아웃 후 다시 로그인 해주세요')" class="bu-aa">Update Info</button>
+						</li>
+					</ol>
+				</form>
+			</nav>
+		</div>
+	</main>
+<th:block th:insert="/layout/footer::footer"/>
+</body>
+</html>

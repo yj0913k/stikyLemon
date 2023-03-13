@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+/*---------------헤더상단메뉴-------------------------*/
+
+/* hn2-이미지크기 */
+div>nav>div>ul>li>a>img{
+    width: 30px;
+    height: 30px;
+}
+/* hn1, hn2 탑마진주려고? */
+div>nav>.wrap>ul.flex{
+   list-style:none;
+   margin-top: 20px;
+}
+/* hn1, hn2 text 영역*/
+div>nav>.wrap ul li{
+	padding: 1em 0.5em;
+}
+/* hn1, hn2 text */
+div>nav>.wrap ul li a{
+	color: rgb(188, 125, 7); /*메뉴 색!  */
+	padding: 1em;
+}
+
+/* 작성하기 버튼 */
+#hn2>.wrap>ul.flex > li>button{
+	background-color:#fde8ae;
+	width: 130px;
+	height: 40px;
+	border: 0;
+	border-radius: 5em;
+}
+
+
+/*----------헤더하단메뉴---------------------------*/
+
+/* 헤더 상단 하단 나누기 */
+#hb>.wrap{
+	border-top:2px solid #e8e8e8;
+}
+/* 하단 메뉴로고와 메뉴 간격 */
+#hb>.wrap dl>dt, #hb>.wrap dl>dd .my-dropdown{
+	margin: 1.5em 3em;
+}
+/* 하단 메뉴로고 */
+#hb>.wrap dl>dt>div>a{
+	font-size: 20px;
+	color: rgba(188, 125, 7, 0.9);
+}
+
+/* 하단 메뉴 */
+#hb>.wrap dl>dd{
+	position: relative;
+}
+#hb>.wrap dl>dd>div> .dropbtn>a{
+	font-size: 18px;
+	padding: 2em;
+	color: rgba(188, 125, 7, 0.9);
+	}
+/* 하단 메뉴 클릭 세부메뉴 보이게 */
+#hb>.wrap dl>dd .my-dropdown:hover .dropdown-content{
+	display: flex;
+	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.12), 0 5px 12px 0 rgba(0,0,0,0.09);
+}
+/* 하단 메뉴 안누르면 세부메뉴 안보이게랑 기본규격 */
+#hb>.wrap dl>dd .my-dropdown .dropdown-content{
+	display: none;
+	position: absolute;
+	width: 916px;
+	top: 75px;
+	left: 0;
+	border: 1px solid rgba(188, 125, 7, 0.2);
+	border-radius: 5em;
+	background-color: rgba(255,255,255,0.4);
+	justify-content: center;
+}
+/* 하단 메뉴의 세부메뉴 */
+#hb>.wrap dl>dd .my-dropdown .dropdown-content ul{
+	display: flex;
+	}
+/* 하단 메뉴의 세부메뉴의 text */
+#hb>.wrap dl>dd .my-dropdown .dropdown-content ul>li a{
+	display: inline-block;
+	padding: 2em 5em;
+	color: rgba(188, 125, 7, 0.7);
+}

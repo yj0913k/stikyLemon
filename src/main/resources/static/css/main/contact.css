@@ -1,0 +1,17 @@
+#all {
+    text-align: center;
+    font-size: 23px;
+    margin:30px auto;
+    line-height: 170%;
+}
+
+#all>div{
+    margin: 0 auto;
+}
+#all>div>ul>.brown{
+    color: #c26427;
+}
+#all>div>ul>h5{
+    margin: 30px 0;
+
+}

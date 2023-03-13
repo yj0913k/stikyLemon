@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/layout2 :: myLayout2(~{this::head}, ~{this::main})">
+<head>
+    <link rel="stylesheet" href="/css/sign/signin2.css">
+    <style type="text/css">
+    </style>
+</head>
+<main>
+    <h1>메인컨텐츠</h1>
+   
+    <div id="all">
+        <div class="wrap">
+            <div class="wrap" id="login">
+                <div>
+                    <a href="/">X</a>
+                </div>
+                <span>Log In</span>
+            </div>
+            <form action="/comm/emailSigninSec" method="post" id="loginForm">
+                <div>
+                    <div class="wrap" id="sgmain">
+                        <span>New to this site?</span>
+                            <span><a href="/comm/signup">Sign Up</a></span>
+                        <div class="wrap" id="input">
+
+                            <div>E-mail</div>
+                            <div>
+                                <input id="inputId" name="email" type="email" placeholder="E-mail"/>
+                            </div>
+
+                            <div>Password</div>
+                            <div>
+                                <input id="inputPw" name="pass" type="password" placeholder="password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="forgot">
+                            <div>
+                                <a href="#">Forgot password?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class = "login" type="submit" form="loginForm">Log In</button>
+            <div id="line">
+                <div></div>
+            </div>
+            <div class="wrap" id="or">
+                <span>&nbsp;&nbsp;or log in with&nbsp;&nbsp;</span>
+            </div>
+            <div class="wrap" id="email">
+                <div class="flex">
+                    <a href="/oauth2/authorization/google"></a>
+                    <a href="/oauth2/authorization/kakao"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</html>

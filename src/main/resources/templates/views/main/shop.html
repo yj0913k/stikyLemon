@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})">
+<head>
+    <link rel="stylesheet" href="/css/main/shop.css">
+    <script th:inline="javascript" src="/js/main/shop.js"></script>
+	<script th:inline="javascript" >
+		$(function () {
+			setCatePick();
+		});
+		function setCatePick(){
+			var cateType = [[${cateType}]];
+			$("#filter>ul>li>input").removeClass("target");
+			$("#cateType_"+cateType).addClass("target");
+		}
+	</script>
+</head>
+<main>
+	<div class="flex" style="margin: 0 auto;">
+		<nav style="flex: 1" id="filter">
+			<span>Filter</span>
+			<hr>
+			<button id="aside-collection" class="flex">
+				<span>Category</span>
+				<span>-</span>
+			</button>
+			<hr>
+			<ul id="coll-list">
+				<li><input class="target" id="cateType_all" type="button" value="All"></li>
+				<li><input type="button" id="cateType_11" value="bags"></li>
+				<li><input type="button" id="cateType_5" value="Shoes"></li>
+				<li><input type="button" id="cateType_2" value="Clothing"></li>
+				<li><input type="button" id="cateType_17" value="Accessories"></li>
+			</ul>
+
+        </nav>
+        <div style="flex:4;" class="flex column">
+            <div class="sort-box">
+                <select name="job">
+                    <option value="">Sort by</option>
+                    <option value="학생">Newest</option>
+                    <option value="회사원">Price (low to high)</option>
+                    <option value="기타">Price (high to low)</option>
+                    <option value="기타">Name A-Z</option>
+                    <option value="기타">Name Z-A</option>
+                </select>
+            </div>
+            <div class="goods-list">
+                <div th:each="dto:${list}">
+                    <a th:href="|/comm/goods/detail/${dto.no}|" class="items flex column around">
+                        <img height="90%" th:src="${dto.defImgUrl}" alt="'no image!'">
+                        <br>
+                        <br>
+                        <br>
+                        <div class="flex column between">
+                            <p th:text="${dto.title}">
+                                backpack large | meet me in the meadows | moonrise pink
+                            </p>
+                            <span th:text="${dto.price}"원>$64.95</span>
+                        </div>
+                    </a>
+                    <div>
+                        <span>★ [[${dto.avg}]] ([[${dto.reCount}]])</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+</html>
+
+

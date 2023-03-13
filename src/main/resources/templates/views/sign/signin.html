@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="layout/layout2 :: myLayout2(~{this::head}, ~{this::main})">
+<head>
+	<link rel="stylesheet" href="/css/sign/signin.css">
+
+	<!--<script type="text/javascript" src="https://livejs.com/live.js"></script>-->
+
+	<style type="text/css">
+	</style>
+</head>
+<main>
+	<h1>메인 컨텐츠</h1>
+	 
+	<div id="all">
+		<div class="wrap">
+			<div class="wrap" id="login">
+				<div>
+					<button class="x">
+						<a href="/">X</a>
+					</button>
+				</div>
+				<span>Log In</span>
+			</div>
+			<div>
+				<div class="wrap" id="sgmain">
+					<span>New to this site?</span>
+					<button>
+						<span><a href="/comm/signup">Sign Up</a></span>
+					</button>
+					<div class="wrap" id="log-btn">
+						<div id="google">
+							<img src="/images/google.png" width="23px"> <a href="/oauth2/authorization/google">Log
+							in with Google</a>
+						</div>
+						<div id="kakao">
+							<img src="/images/kakao.png" width="23px"><a href="/oauth2/authorization/kakao">Log
+							in with Kakao</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="line">
+				<div></div>
+			</div>
+			<div class="wrap" id="or">
+				<span>&nbsp;&nbsp;or&nbsp;&nbsp;</span>
+			</div>
+			<div class="wrap" id="email">
+				<div>
+					<a href="/comm/emailSignin">log in with Email</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" href="/css/board/board-list.css">
+<script type="text/javascript" src="https://livejs.com/live.js"></script>
+<style type="text/css">
+</style>
+</head>
+<main>
+	<div class="wrap">
+		<section class="board content-size">
+			<div class="wrap content-size">고객센터 문의</div>
+			<div class="wrap center flex">
+				<div class="wrap left4 view-size-m">
+					<button class="bu-a"><a href="/comm/qna"><img src="/images/orange.png"/>뒤로가기</a></button>
+				</div>
+				<div class="wrap right4 view-size-m">
+					<button class="bu-a"><a href="/members/board-write"><img src="/images/orange.png"/>글쓰기</a></button>
+				</div>
+			</div>
+			<div class="wrap6 content-size-v">
+				<ul class="call"><img src="/images/cs/call.png"/><a>고객센터 1990-5555</a>
+					<li class="dd">평일 11:00 ~ 12:00</li>
+					<li class="dd">토,일요일 휴무</li>
+					<li class="dd">점심시간 12:00 ~ 13:00</li>
+				</ul>
+			</div>
+			<div>
+				<table class="table-0 ">
+					<thead class="wrap">
+						<tr class="tr1">
+							<th class="bno">번호</th>
+							<th class="title">제목</th>
+							<th class="writer">조회수</th>
+							<th class="createdDate">작성자</th>
+							<th class="readCount">작성일</th>
+						</tr>
+					</thead>
+					<tbody class="wrap">
+						<tr class="tr2" th:each="dto : ${list}">
+		    				<td th:text="${dto.bno}">글번호</td>
+		    				<td><a class="td1" th:href="|/comm/board-list/${dto.bno}|">[[${dto.title}]]</a></td>
+		    				<td th:text="${dto.readCount}">조회수</td>
+		    				<td>[[${dto.writer}]]</td>
+		    				<td>
+		    					<span class="td1" th:if="${dto.updatedDate.toLocalDate() ne dto.toDay}"
+		    					th:text="${dto.updatedDate.toLocalDate()}">날짜만 출력</span>
+		    					<span class="td1" th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}" 
+		    					th:text="${#temporals.format(dto.updatedDate, 'HH시 mm분 ss초')}">시간만 출력</span>
+		    				</td>
+		    			</tr>
+		    			<tr th:if="${p.getNumberOfElements()==0}">
+		    				<td colspan="5">작성된 문의글이 없습니다.</td>
+		    			</tr>
+					</tbody>
+				</table>
+				<div th:if="${p.getNumberOfElements()>0}">
+    			<a th:if="${p.hasPrevious()}" th:href="|/comm/board-list?page=${p.getNumber()}|">&lt;</a>
+    			<span th:text="${p.getNumber()+1}">현재페이지</span>
+    			/
+    			<span th:text="${p.getTotalPages()}">총페이지수</span> 
+    			<a th:if="${p.hasNext()}" th:href="|/comm/board-list?page=${p.getNumber()+2}|">&gt;</a>
+    		</div>
+			</div>
+		</section>
+	</div>
+</main>
+</html>

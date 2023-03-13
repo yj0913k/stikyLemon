@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/layout2 :: myLayout2(~{this::head}, ~{this::main})">
+<head>
+    <link rel="stylesheet" href="/css/sign/signup2.css">
+    <style type="text/css">
+    </style>
+</head>
+<main>
+    <h1>메인컨텐츠</h1>
+    <div id="all">
+        <div class="wrap">
+            <div class="wrap" id="login">
+                <div>
+                    <button class="x">
+                        <a href="/">X</a>
+                    </button>
+                </div>
+                <span>Sign Up</span>
+            </div>
+            <form action="/comm/signup" method="post" id="signUpForm">
+                <div>
+                    <div class="wrap" id="sgmain">
+                        <span>Already a member?</span>
+                        <button>
+                            <span><a href="/members/signin">Log In</a></span>
+                        </button>
+                        <div class="wrap" id="input">
+                            <div>Name</div>
+                            <div>
+                                <input id="inputName" name="name" type="text" placeholder="Name"/>
+                            </div>
+                            <div>E-mail</div>
+                            <div>
+                                <input id="inputId" name="email" type="email" placeholder="E-mail"/>
+                            </div>
+
+                            <div>Password</div>
+                            <div>
+                                <input id="inputPw" name="pass" type="password" placeholder="password"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class="log-btn" type="submit" form="signUpForm">Sign Up</button>
+            <div id="line">
+                <div></div>
+            </div>
+            <div class="wrap" id="or">
+                <span>&nbsp;&nbsp;or sign up with&nbsp;&nbsp;</span>
+            </div>
+            <div class="warp" id="email">
+                <div class="flex">
+                    <a href="/oauth2/authorization/google"></a>
+                    <a href="/oauth2/authorization/kakao"></a>	                    </button>
+                </div>
+            </div>
+        </div>
+</main>
+</html>

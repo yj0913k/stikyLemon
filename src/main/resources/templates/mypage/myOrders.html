@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  th:replace="layout/layout :: myLayout(~{this::head}, ~{this::main})">
+<head>
+	<link rel="stylesheet" href="/css/commons/common.css">
+    <link rel="stylesheet" href="/css/commons/header.css">
+    <link rel="stylesheet" href="/css/commons/footer.css">
+	<link rel="stylesheet" href="/css/user/mypage/myOrders.css">
+	<script src="/js/user/myOrders.js"></script>
+	<!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- jQuery -->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script type="text/javascript">
+	function btnPgClicked(){
+		  //1.페이지에서 결제정보 수집하는 방법 : 구매자 정보,상품정보,배송
+		
+		var checkedItems=$(".cb:checked");
+		//.siblings(".item-no");
+		
+		var title=$(checkedItems[0]).siblings(".title").val();
+		if(checkedItems.length>1){
+			title +=" 외 "+(checkedItems.length-1)+"건";
+		}					
+		//var quantity;
+		var payPrice=0;
+		console.log("length: "+checkedItems.length);
+		
+	  	$.each(checkedItems, function(index, item){
+	  		payPrice += parseInt($(item).siblings(".payPrice").val());
+	  	});
+		  //payPrice=100;		//임시로
+	  	merchant_uid="ORD_"+new Date().getTime();
+	  	
+	  	
+	  	
+	  	var data={
+	  		merchant_uid: merchant_uid,
+	  		name: title,
+	  		amount: payPrice,
+	  		buyer_email: $("#user-email").val(),
+	  		buyer_name: $("#user-name").val(),
+	  		buyer_tel: "",
+			buyer_addr: "",
+			buyer_postcode: ""
+	  	};
+	  	requestPay(data);
+	  }
+	</script>
+</head>
+<body>
+	<th:block th:insert="/layout/header::header"/>
+		<main class="flex center">
+			<h1>주문목록페이지</h1>
+			<!-- 오더엔티티의 status(상태)가 ORDER가 아닐 경우 myorders-not이 나타나고 myorders-order가 사라지게  할 예정-->
+			<!-- th:if="${#authentication.principal.nickName==null}"
+								  sec:authentication="principal.name" 이거를 응용하거나 자바 스크립트를 사용하거나 하면될듯 -->
+			<div class="myorders-not view-size-c center">
+			<!-- th:if="${#status!=ORDER" -->
+				<ul class="orders">
+					<li class="myorders-menu">
+						<p>My Orders</p>
+						<p>view your order or check the status of a recent order.</p>
+					</li>
+					<li class="myorders-content ">
+						<p>You haven't placed any orders yet...</p>
+						<p><a href="/">Start Browsing</a></p>
+					</li>
+				</ul>
+			</div>
+			<!-- 오더엔티티의 status(상태)가 ORDER일 경우 myorders-order가 나타나고 myorders-not이 사라지게  할 예정-->
+			<!-- 한 멤버만 주문할 수 있으니까 멤버 이메일로 레파지토리를 통해 엔티티에 접근해 리스트로 받아올 것? 쨋든 데이터를 가져올거임-->
+			<!-- 주문일/주문번호, 주문상품이미지, 주문상품이름, 주문토탈금액, 주문수량, 주문상태 (결제->입금완료,취소신청), 배송지이름-->
+			<!-- 
+			<div class="myorders-order view-size-c center">
+				
+				
+				<table>
+					<thead>
+						<tr>
+							<td>선택</td>
+							<td>주문일</td>
+							<td>image</td>
+							<td>item</td>
+							<td>수량</td>
+							<td>price</td>
+							<td>주문상태</td>
+							<td>address</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="orders-info"  th:each="dto : ${list}" >
+							<td>
+								<input type="checkbox" class="cb"  checked="checked">
+								<input type="hidden" readonly="readonly" class="orderedDate"  th:value="${dto.member.mno}" >
+								<input type="hidden" readonly="readonly" class="item-no"  th:value="${dto.goods.no}" >
+								<input type="hidden" readonly="readonly" class="quantity"  th:value="${dto.quantity}" >
+								<input type="hidden" readonly="readonly" class="title"  th:value="${dto.goods.title}" >
+								<input type="hidden" readonly="readonly" class="payPrice"  th:value="${dto.totPrice + dto.goods.dPrice}" >
+								<input type="hidden" readonly="readonly" class="deliveryAddrName"  th:value="${dto.delivery.dno}" >
+							</td>
+							<td th:text="${dto.orderedDate}">주문일</td>
+							<td><img alt="상품목록이미지" th:src="${dto.goods.defImgUrl}" height="100px"></td>
+							<td th:text="${dto.goods.title}">상품명</td>
+							<td th:text="${dto.quantity}">구매수량</td>
+							<td th:text="${#numbers.formatInteger(dto.totPrice + dto.goods.dPrice , 0 ,'COMMA')}">주문금액</td>
+							<td th:text="${dto.status}">주문상태</td>
+							<td th:text="${dto.receiverName}">배송지이름</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> 
+			-->
+		</main>
+	<th:block th:insert="/layout/footer::footer"/>
+</body>
+</html>

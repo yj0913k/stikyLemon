@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+#all {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50vh;
+	text-align: center;
+	font-weight: 300;
+}
+
+#all>div {
+	margin-bottom: 30px;
+}
+
+#all div>button>a {
+	display: inline-block;
+	left: 180px;
+	top: -20px;
+	font-size: 20px;
+	position: relative;
+	color: #a9a9a9;
+}
+
+.wrap {
+	margin: 20px 0;
+}
+
+#sgmain>button>span>a {
+	position: relative;
+	color: #0198ff;
+}
+
+#input {
+	margin: 10px;
+	font-size: 13px;
+	color: #a9a9a9;
+	text-align: left;
+}
+
+#login {
+	font-size: 48px;
+	font-weight: 300;
+	margin-top: 50px;
+}
+
+#input div>input {
+	text-align: left;
+	width: 316px;
+	border-bottom: 1px solid #f9b840;
+}
+#input div>input:focus{
+	outline: none;
+}
+
+#input>div {
+	margin-top: 10px;
+}
+
+#email>div{
+	justify-content: center;
+}
+
+#email>div>button>img {
+	border-radius: 5px;
+}
+
+.log-btn{
+	width: 316px;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	box-sizing: border-box;
+	margin: 10px;
+	font-size: 13px;
+	background-color: #bcbcbc;
+	color: #fff;
+	border-radius: 5px;
+}
+
+#line>div {
+	position: relative;
+	z-index: -3;
+	margin-left: 10px;
+	width: 316px;
+	height: 13px;
+	border-bottom: 1px solid #a9a9a9;
+}
+
+#or {
+	margin: 0px;
+}
+
+#or>span {
+	position: relative;
+	z-index: 3;
+	top: -15px;
+	background-color: #fff;
+}
+#email{
+	width: 336px;
+	justify-content: center;
+}
+#email>div>a {
+	margin: 0 15px;
+	border-radius: 5px;
+	width: 25px;
+	height: 25px;
+	background-repeat: no-repeat;
+	background-size: contain;
+
+}
+#email>div>a:first-child{
+	justify-content: left;
+	background-image: url("/images/google.png");
+}
+
+#email > div > a:last-child {
+	background-image: url("/images/kakao.png");
+}

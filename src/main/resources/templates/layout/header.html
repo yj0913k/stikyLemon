@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script type="text/javascript">
+	//var left=0;
+	$(function () {
+		createCategory($(".gnb"));
+	});
+
+	function createCategory(target) {
+		var parentNo = $(target).attr("value");
+		console.log("pno:" + parentNo);
+		$.ajax({
+			url: `/comm/categorys/${parentNo}`,
+			success: function (olTag) {
+				$(target).children(".cate-wrap").html(olTag);
+
+				//$(target).children(".sub").children("ol").css("left",left+'px').css("top",0);
+				//left = left+179;
+				var sub = $(target).find(".cate");
+				//console.log(sub);
+				$.each(sub, subCategory);
+			}
+		});
+	}
+
+	function subCategory() {
+		//console.log($(this).attr("value"));
+		createCategory($(this));
+	}
+</script>
+<header>
+	<h1>헤더파일</h1>
+	<div class="wrap">
+
+		<a href="/"><img src="/images/headerImg/or.png" class="img_logo"/></a>
+		<!-- ↑ 로고이미지  ↓로고 글씨! -->
+		<section id="logo">
+			<h1>로고</h1>
+			<div class="wrap content-size">
+				<a href="/">
+					<span>sticky&nbsp;&nbsp;orange</span>
+					<!-- &nbsp;은 띄어쓰기 해줌! 한번하면 한칸, 두번하면 두칸 -->
+				</a>
+			</div>
+		</section>
+		<section id="um">
+			<h1>유저메뉴</h1>
+			<div class="wrap content-size">
+				<ul class="Al flex right">
+					<li class="cart">
+						<a href="/members/cart"><img src="/images/headerImg/cart.png" class="img_cart"/>Shopping cart
+							&nbsp;|</a>
+					</li>
+					<li class="log">
+						<a href="/comm/qna">
+							<span><img src="/images/headerImg/oror.png" width="17px" height="17px;">Community&nbsp;&nbsp;&nbsp;|</span>
+						</a>
+					</li>
+					<!-- <li class="log" sec:authorize="isAuthenticated()">
+						<span th:text="${#authentication.name+'(이름)'}">유저네임정보</span>
+						<span class="log-email" sec:authentication="principal.email"></span>
+						<span th:if="${#authentication.principal.nickName==null}"
+							  sec:authentication="principal.name"></span>
+						<span th:if="${#authentication.principal.nickName!=null}"
+							  sec:authentication="principal.nickName"></span>
+
+						<a href="/logout"><span>Logout</span></a>
+					</li>
+					</li>
+					-->
+					<li class="log" sec:authorize="isAnonymous()">
+						<a href="/comm/signin">
+							<span>&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;</span>
+						</a>
+					</li>
+
+					<li class="mypage" sec:authorize="isAuthenticated()">
+						<button type="button" class="mypage-btn">&nbsp;&nbsp;
+							<span th:if="${#authentication.principal.nickName==null}"
+								  sec:authentication="principal.name"></span>
+							<span th:if="${#authentication.principal.nickName}"
+								  sec:authentication="principal.nickName"></span>
+							<img src="/images/headerImg/down.png" class="img_mypage"/>
+						</button>
+						<div class="mypage_content wrap">
+							<p><a href="/members/myOrders">my orders</a></p>
+							<p><a href="/members/myAccount">my account</a></p>
+							<p><a href="/members/myAddresses">my addresses</a></p>
+							<p sec:authorize="hasRole('ADMIN')"><a href="/admin">admin page</a></p>
+
+							<p><a href="/logout">logout</a></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<nav id="nb">
+			<h1>메인메뉴</h1>
+			<div class="wrap">
+				<ul class="flex">
+					<!-- <li value="0" class="gnb cate">
+							<a href="#" class="flex">
+								<span class="gnb-icon">
+									<i></i>
+									<i></i>
+									<i></i>
+								</span>
+								<span>전체상품보기</span>
+							</a>
+							<div class="cate-wrap">
+								카테고리 자동삽입
+							</div>
+					</li> -->
+					<li value="0" class="gnb cate menu1">
+						<a href="/comm/goods/list">shop</a>
+						<ul class="second-cate sub">
+							<li><a href="/comm/goods/list/11">bags</a></li>
+							<li><a href="/comm/goods/list/5">Shoes</a></li>
+							<li><a href="/comm/goods/list/2">Clothing</a></li>
+							<li><a href="/comm/goods/list/17">Accessories</a></li>
+						</ul>
+						<!-- <ul class="sub">
+							<li>
+								<a href="#">all&nbsp;products</a>
+							</li>
+							<li>
+								<a href="#">bags</a>
+							</li>
+							<li>
+								<a href="#">stationery</a>
+							</li>
+							<li>
+								<a href="#">accessories</a>
+							</li>
+							<li>
+								<a href="#">the&nbsp;sticky&nbsp;sis&nbsp;club</a>
+							</li>
+							<li>
+								<a href="#">gift&nbsp;card</a>
+							</li>				
+						</ul> -->
+					</li>
+					<li><a href="#">gift&nbsp;shop</a></li>
+					<li><a href="#">the&nbsp;stick&nbsp;sis&nbsp;club</a>
+						<ul class="sub S">
+							<li>
+								<a href="#">shop</a>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#">about</a></li>
+					<li><a href="#">wholesale</a></li>
+					<li><a href="/comm/contact">contact</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</header>
+</html>

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* 헤더 배경컬러 */
+header{
+	background-color: #fff;
+}
+/* 메인 기본 사이즈 설정 */
+main{	
+	width:1200px;
+	margin: 5em auto;
+	padding: 5em;
+	background-color: rgba(251, 211, 138,0.25);
+	border-radius: 25px;
+ 	border: 2px solid rgba(251, 211, 138,0.25);
+ 	box-shadow: 1px 1px rgba(251, 211, 138,0.25);
+}
+

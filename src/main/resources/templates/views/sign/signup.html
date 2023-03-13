@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/layout2 :: myLayout2(~{this::head}, ~{this::main})">
+<head>
+    <link rel="stylesheet" href="/css/sign/signup.css">
+    <style type="text/css">
+    </style>
+</head>
+<!-- 홈페이지에서 login 버튼 누를 경우 나오는 페이지입니다. -->
+<main>
+    <h1>메인컨텐츠</h1>
+    <div id="all">
+        <div class="wrap">
+            <div class="wrap" id="login">
+                <div>
+                    <button class="x">
+                        <a href="/">X</a>
+                    </button>
+                </div>
+                <span>Sign Up</span>
+            </div>
+            <form action="/comm/emailSignup" method="post">
+                <div>
+                    <div class="wrap" id="sgmain">
+                        <span>Already a member?</span>
+                        <button>
+                            <span><a href="/members/signin">Log In</a></span>
+                        </button>
+                        <div class="wrap" id="log-btn">
+                            <div id="google">
+                                <img src="/images/google.png" width="23px"> <a href="/oauth2/authorization/google">Sign
+                                up with Google</a>
+                            </div>
+                            <div id="kakao">
+                                <img src="/images/kakao.png" width="23px"> <a href="/oauth2/authorization/kakao">Sign
+                                up with Kakao</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div id="line">
+                <div></div>
+            </div>
+            <div class="wrap" id="or">
+                <span>&nbsp;&nbsp;or&nbsp;&nbsp;</span>
+            </div>
+            <div class="wrap" id="email">
+                <div>
+                    <a href="/comm/emailSignup">sign up with Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</html>

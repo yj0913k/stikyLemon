@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+
+.content-size {
+	width: 980px;
+	margin: 0 auto;
+}
+
+.flex {
+	display: flex;
+}
+
+.right {
+	justify-content: flex-end;
+}
+
+/*로고 이미지와 로고글씨! */
+.img_logo {
+	display: block;
+	margin: 30px auto;
+	width: 55px;
+	height: 55px;
+}
+.img_logo:hover{
+	content : url('/images/orange.png');
+	margin: 30px auto;
+	width: 55px;
+	height: 55px;
+	text-decoration:none;
+}
+
+#logo>.wrap a {
+	font-size: 0;
+}
+
+#logo>.wrap a span {
+	font-weight: normal;
+	display: block;
+	margin: -30px auto;
+	width: 125px;
+	height: 55px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 20px;
+	color: #474747;
+	
+}
+
+/* 로그인, 쇼핑카트 */
+#um>.wrap .Al li{
+	margin-right: -30px;
+	padding: 0px 10px 0px 10px;
+}
+
+#um>.wrap .Al li.cart {
+	
+}
+#um>.wrap .Al li.cart a img {
+	height: 30px;
+	padding-right: 13px;
+    margin: -8px;
+	
+}
+
+#um>.wrap .Al li.cart a {
+	padding: 10px;
+	color: #f9b840;
+	font-weight: 400;
+	margin-top: -10px;
+}
+
+#um>.wrap .Al li.cart a:hover {
+	color: rgb(251, 211, 138);
+	text-decoration-line:none;
+}
+
+#um>.wrap .Al li.log a span {
+	padding: 10px 0 10px 10px;
+	color: #f9b840;
+	font-weight: 400;
+}
+
+#um>.wrap .Al li.log a span:hover {
+	color: rgb(251, 211, 138);
+	text-decoration-line:none;
+}
+#um>.wrap .Al li.log a{
+	text-decoration: none;
+}
+/*////////////////////////////////////////*/
+/*로그인 시 로그인없어지고 닉네임나오는 부분 */
+#um>.wrap .Al li.mypage{
+	position: relative;	
+}
+/*닉네임나오는 부분 */
+#um>.wrap .Al li.mypage span {
+	padding: 10px 0 10px 10px;
+	color: #f9b840;
+	font-weight: 400;
+} 
+/*로그인시 나타나는 닉네임 호버시 흐려지게 */
+#um>.wrap .Al li.mypage span:hover {
+	color: rgb(251, 211, 138);
+	text-decoration:none;
+}
+/*닉네임 옆 이미지*/
+#um>.wrap .Al li.mypage img {
+	height: 23px;
+	padding: 0.3em;
+    margin-right: 6px;
+}
+/* 이미지 클릭시 마이페이지메뉴 나오게*/
+#um>.wrap .Al li.mypage:hover .mypage_content {
+  display: block;
+}
+/*마이페이지 메뉴내용*/
+#um>.wrap .Al li.mypage div.mypage_content{
+	position: absolute;
+	display: none;
+	background-color: rgba(255,255,255,0.9);
+	border-radius:15px;
+	z-index: 10;
+}
+/*마이페이지 메뉴내용 p태그 공간줌*/
+#um>.wrap .Al li.mypage div.mypage_content p {
+	width: 120px;
+	padding: 0.5em;
+	margin: 0.5em;
+	display: block;
+}
+/*마이페이지 메뉴내용의 a태그*/
+#um>.wrap .Al li.mypage div.mypage_content p a{
+	display: inline-block;
+	color: rgb(188, 125, 7);
+	text-decoration-line:none;
+}
+/*마이페이지 메뉴내용호버시 색변환*/
+#um>.wrap .Al li.mypage div.mypage_content p a:hover{
+	color: darkorange;
+	text-decoration:none;
+}
+
+/* .mypage-btn{
+padding: 0 0px 0px 6px;
+
+} */
+/*////////////////////////////////////////*/
+
+/* 메인메뉴 */
+#nb>.wrap>ul.flex {
+	justify-content: center; /* 메뉴가운데!!가로 정렬 */
+}
+
+#nb>.wrap>ul.flex>li {
+	display: inline-block;
+	padding: 25px; /* 메뉴사이 간격 조정!  */
+	/* background:#eee;  */
+	position: relative; /*이거적어야 서브메뉴 아래로 수직정렬!  */
+}
+
+#nb>.wrap ul li a {
+	color: rgb(188, 125, 7); /*메뉴 색!  */
+	font-weight: 400;
+}
+
+#nb>.wrap ul li a:hover { /* 마우스 커서올리면 색바뀜!*/
+	color: rgb(251, 211, 138);
+	text-decoration:none;
+}
+
+#nb>.wrap ul li ul.sub { /* 숨겨진 메뉴!!*/
+	display: none;
+	position: absolute;
+	text-align: center;
+	left: -25px;
+}
+
+#nb>.wrap ul li ul.sub.S {
+	left: 10px;
+}
+
+#nb>.wrap ul li:hover ul.sub {
+	display: block; /* 마우스올리면 메뉴펼쳐짐!!  */
+	
+}
+
+
+#nb>.wrap ul li ul.sub>li {
+	display: inline-block;
+	background: white;
+	background-position: center;
+	margin: auto;
+	padding: 13px 20px 15px 20px ;
+	width: 130px;
+}
+
+#nb>.wrap ul li ul.sub>li:last-child{
+	border-radius: 0 0 5px 5px;
+}
+.log span{
+	color: #97610f;
+}
+.log .log-email{
+	padding-left: 10px;
+}
+
+.menu1 ul{
+	display: none;
+	position: absolute;
+	background-color: rgba(255,255,255,90%);
+	width: 100%;
+	left: 0;
+	text-align: center;
+	z-index: 10;
+	border-radius: 15px;
+
+}
+.menu1:hover ul{
+	display: block;
+	 z-index: 2;
+}
+.menu1 ul>li{
+	margin-top: 0.5em;
+	padding: 0 1em;
+}
+.menu1 ul>li:last-child{
+	margin-bottom: 0.5em;
+}
